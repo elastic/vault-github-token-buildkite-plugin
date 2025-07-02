@@ -7,4 +7,6 @@ requirements:
   - buildkite-agent
 configuration:
   properties:
+    noop:
+      type: number
   additionalProperties: false

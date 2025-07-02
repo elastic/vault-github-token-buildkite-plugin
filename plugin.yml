@@ -1,14 +1,9 @@
 name: vault-github-token
-description: Create  pipelines access to AWS resources using Workload Identity Federation
+description: Create a GITHUB_TOKEN environment variable from VAULT_GITHUB_TOKEN.
 author: https://github.com/elastic
 public: true
 requirements:
   - bash
   - buildkite-agent
 configuration:
-  properties:
-    duration:
-      type: number
-    aws-account-id:
-      type: number
   additionalProperties: false

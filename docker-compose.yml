@@ -1,7 +1,7 @@
 services:
   plugin-lint:
     image: buildkite/plugin-linter:v2.1.0
-    command: ['--id', 'elastic/vault-buildkite-plugin']
+    command: ['--id', 'elastic/vault-github-token']
     volumes:
       - ".:/plugin:ro"
 

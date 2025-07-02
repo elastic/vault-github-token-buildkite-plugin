@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+GITHUB_TOKEN=$VAULT_GITHUB_TOKEN
+echo "${VAULT_GITHUB_TOKEN}" | buildkite-agent redactor add
+export GITHUB_TOKEN

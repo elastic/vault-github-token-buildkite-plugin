@@ -1,0 +1,12 @@
+services:
+  plugin-lint:
+    image: buildkite/plugin-linter:v2.1.0
+    command: ['--id', 'elastic/vault-buildkite-plugin']
+    volumes:
+      - ".:/plugin:ro"
+
+  test:
+    command: ["bats", "--show-output-of-passing-tests", "--verbose-run", "tests/"]
+    image: buildkite/plugin-tester:v4.1.1
+    volumes:
+      - ".:/plugin:ro"

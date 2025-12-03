@@ -3,10 +3,10 @@ services:
     image: buildkite/plugin-linter:v2.1.0
     command: ['--id', 'elastic/vault-github-token']
     volumes:
-      - ".:/plugin:ro"
+      - ".:/plugin:ro,z"
 
   test:
     command: ["bats", "--show-output-of-passing-tests", "--verbose-run", "tests/"]
     image: buildkite/plugin-tester:v4.1.1
     volumes:
-      - ".:/plugin:ro"
+      - ".:/plugin:ro,z"

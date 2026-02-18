@@ -12,7 +12,10 @@ services:
       - ".:/plugin:ro,z"
 
   shellcheck:
-    image: koalaman/shellcheck:v0.11.0
+    image: koalaman/shellcheck-alpine:v0.11.0
+    entrypoint: ["sh", "-c"]
+    command:
+      - "find hooks .buildkite/scripts -type f 2>/dev/null | xargs shellcheck --shell=bash --external-sources --color=always --format=gcc"
     working_dir: /plugin
     volumes:
       - ".:/plugin:ro,z"

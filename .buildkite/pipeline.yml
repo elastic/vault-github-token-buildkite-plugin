@@ -1,0 +1,7 @@
+agents:
+  provider: gcp
+  image: family/core-ubuntu-2204
+
+steps:
+  - label: test
+    command: "echo hello!"

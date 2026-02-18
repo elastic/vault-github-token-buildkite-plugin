@@ -1,12 +1,27 @@
 services:
   plugin-lint:
-    image: buildkite/plugin-linter:v2.1.0
-    command: ['--id', 'elastic/vault-github-token']
+    image: buildkite/plugin-linter:v3.0.0
+    command: ['--id', 'elastic/vault-github-token', '--path', '/plugin']
     volumes:
       - ".:/plugin:ro,z"
 
   test:
     command: ["bats", "--show-output-of-passing-tests", "--verbose-run", "tests/"]
-    image: buildkite/plugin-tester:v4.1.1
+    image: buildkite/plugin-tester:v4.3.0
     volumes:
       - ".:/plugin:ro,z"
+
+  shellcheck:
+    image: koalaman/shellcheck:v0.11.0
+    command: ["--shell", "bash", "--external-sources", "--color=always", "--format=gcc", "/plugin/hooks/pre-command"]
+    volumes:
+      - ".:/plugin:ro,z"
+
+  e2e-test:
+    image: buildkite/plugin-tester:v4.3.0
+    environment:
+      - GITHUB_TOKEN
+    volumes:
+      - ".:/plugin:ro,z"
+    working_dir: /plugin
+    command: [".buildkite/scripts/test-e2e.sh"]

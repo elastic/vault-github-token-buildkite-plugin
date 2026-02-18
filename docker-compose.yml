@@ -13,7 +13,7 @@ services:
 
   shellcheck:
     image: koalaman/shellcheck:v0.11.0
-    command: ["--shell", "bash", "--external-sources", "--color=always", "--format=gcc", "/plugin/hooks/pre-command"]
+    working_dir: /plugin
     volumes:
       - ".:/plugin:ro,z"
 

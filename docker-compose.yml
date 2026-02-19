@@ -14,8 +14,11 @@ services:
   shellcheck:
     image: koalaman/shellcheck-alpine:v0.11.0
     entrypoint: ["sh", "-c"]
-    command:
-      - "find hooks .buildkite/scripts -type f 2>/dev/null | xargs shellcheck --shell=bash --external-sources --color=always --format=gcc"
+    command: >
+      "
+      echo 'running shellcheck' ;
+      (find hooks .buildkite/scripts -type f 2>/dev/null | xargs shellcheck --shell=bash --external-sources --color=always --format=gcc) && echo 'shellcheck passed' || (echo 'shellcheck failed' && exit 1);
+      "
     working_dir: /plugin
     volumes:
       - ".:/plugin:ro,z"

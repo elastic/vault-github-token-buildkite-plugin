@@ -7,6 +7,7 @@ echo "--- :github: Verifying GITHUB_TOKEN is set"
 if [ -z "${GITHUB_TOKEN:-}" ]; then
   echo "^^^ +++"
   echo "Error: GITHUB_TOKEN is not set. The plugin did not export the token."
+  echo "If you are running this locally, make sure to set the GITHUB_TOKEN environment variable before running the tests."
   exit 1
 fi
 

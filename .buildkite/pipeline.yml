@@ -3,5 +3,20 @@ agents:
   image: family/core-ubuntu-2204
 
 steps:
-  - label: test
-    command: "echo hello!"
+  - label: ":test_tube: Unit Tests"
+    command: make test
+
+  - label: ":lint-roller: Plugin Lint"
+    command: make plugin-lint
+
+  - label: ":shell: ShellCheck"
+    command: make shellcheck
+
+  - label: ":github: E2E - Test Plugin Functionality"
+    plugins:
+      - elastic/vault-github-token#${BUILDKITE_COMMIT}: ~
+    command: make e2e-test
+
+notify:
+  - slack: "#observablt-bots"
+    if: build.branch == "main" && build.state == "failed"

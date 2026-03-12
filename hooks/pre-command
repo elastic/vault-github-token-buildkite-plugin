@@ -5,3 +5,8 @@ set -euo pipefail
 GITHUB_TOKEN=$VAULT_GITHUB_TOKEN
 echo "${VAULT_GITHUB_TOKEN}" | buildkite-agent redactor add
 export GITHUB_TOKEN
+
+if [[ "${BUILDKITE_PLUGIN_VAULT_GITHUB_TOKEN_CONFIGURE_GIT_USER:-false}" == "true" ]]; then
+  git config user.email "elastic-ci[bot]@users.noreply.github.com"
+  git config user.name "elastic-ci[bot]"
+fi

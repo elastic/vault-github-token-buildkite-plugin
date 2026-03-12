@@ -17,6 +17,12 @@ steps:
       - elastic/vault-github-token#${BUILDKITE_COMMIT}: ~
     command: make e2e-test
 
+  - label: ":git: E2E - Test Git Config"
+    plugins:
+      - elastic/vault-github-token#${BUILDKITE_COMMIT}:
+          configure-git-user: true
+    command: .buildkite/scripts/test-e2e-git-config.sh
+
 notify:
   - slack: "#observablt-bots"
     if: build.branch == "main" && build.state == "failed"

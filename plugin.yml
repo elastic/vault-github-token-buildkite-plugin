@@ -9,4 +9,6 @@ configuration:
   properties:
     noop:
       type: number
+    configure-git-user:
+      type: boolean
   additionalProperties: false

@@ -8,7 +8,7 @@
 steps:
   - command: <...>
     plugins:
-      - elastic/vault-github-token#v0.1.0:
+      - elastic/vault-github-token#v0.2.0:
 ```
 
 ## Configuration
@@ -26,6 +26,6 @@ Defaults to `false` (opt-in).
 steps:
   - command: <...>
     plugins:
-      - elastic/vault-github-token#v0.1.0:
+      - elastic/vault-github-token#v0.2.0:
           configure-git-user: true
 ```

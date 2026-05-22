@@ -3,7 +3,7 @@
 set -euo pipefail
 
 GITHUB_TOKEN=$VAULT_GITHUB_TOKEN
-echo "${VAULT_GITHUB_TOKEN}" | buildkite-agent redactor add
+echo "${VAULT_GITHUB_TOKEN}" | buildkite-agent redactor add || echo "WARNING: Failed to add token to Buildkite redactor. The token may appear in logs." >&2
 export GITHUB_TOKEN
 
 if [[ "${BUILDKITE_PLUGIN_VAULT_GITHUB_TOKEN_CONFIGURE_GIT_USER:-false}" == "true" ]]; then

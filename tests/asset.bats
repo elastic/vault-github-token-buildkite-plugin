@@ -31,6 +31,19 @@ export VAULT_GITHUB_TOKEN="mock-token"
     assert_output --partial "VAULT_GITHUB_TOKEN: unbound variable"
 }
 
+@test "redactor failure does not fail the hook" {
+    # arrange
+    stub buildkite-agent \
+        'redactor add : exit 1'
+
+    # act
+    run "$PWD/hooks/pre-command"
+
+    # assert
+    assert_success
+    assert_output --partial "WARNING: Failed to add token to Buildkite redactor"
+}
+
 @test "configure-git-user sets git user name and email" {
     # arrange
     export BUILDKITE_PLUGIN_VAULT_GITHUB_TOKEN_CONFIGURE_GIT_USER="true"

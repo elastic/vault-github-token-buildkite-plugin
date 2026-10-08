@@ -11,6 +11,19 @@ steps:
       - elastic/vault-github-token#v0.2.2:
 ```
 
+### `export-tf-var-github-token` (optional, boolean)
+
+When set to `true`, exports the GitHub token as `TF_VAR_github_token` for Terraform configurations that consume it as an input variable.
+
+Defaults to `false` (opt-in).
+
+```yml
+steps:
+  - command: <...>
+    plugins:
+      - elastic/vault-github-token#v0.2.2:
+          export-tf-var-github-token: true
+```
 ## Configuration
 
 ### `configure-git-user` (optional, boolean)

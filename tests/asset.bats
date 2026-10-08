@@ -74,3 +74,30 @@ export VAULT_GITHUB_TOKEN="mock-token"
     # assert
     assert_success
 }
+
+@test "export-tf-var-github-token sets terraform variable when enabled" {
+    # arrange
+    export BUILDKITE_PLUGIN_VAULT_GITHUB_TOKEN_EXPORT_TF_VAR_GITHUB_TOKEN="true"
+    stub buildkite-agent \
+        'echo "mock-token"'
+
+    # act
+    run bash -c 'source "$1"; printf "%s" "$TF_VAR_github_token"' _ "$PWD/hooks/pre-command"
+
+    # assert
+    assert_success
+    assert_output "mock-token"
+}
+
+@test "export-tf-var-github-token is disabled by default" {
+    # arrange
+    stub buildkite-agent \
+        'echo "mock-token"'
+
+    # act
+    run bash -c 'source "$1"; printf "%s" "${TF_VAR_github_token:-unset}"' _ "$PWD/hooks/pre-command"
+
+    # assert
+    assert_success
+    assert_output "unset"
+}

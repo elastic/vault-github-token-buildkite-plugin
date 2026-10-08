@@ -11,4 +11,6 @@ configuration:
       type: number
     configure-git-user:
       type: boolean
+    export-tf-var-github-token:
+      type: boolean
   additionalProperties: false
